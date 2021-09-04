@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/* -------------------- 全体の設定 -------------------- */
+body {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+    font-size: 4em; 
+    text-align: center;
+}
+
+
+/* -------------------- 数値カウントの設定 -------------------- */
+ #count {
+   margin: 0;
+   font-weight: bold;
+   color: #888;
+ }
+ 
+ 
+ /* --------------------入力欄 -------------------- */
+  #wrap {
+   margin-top: 20px;
+   padding: 20px 10px;
+   background-color: #666;
+   font-weight: bold;
+   color: #fff;
+ }
+ 
+ 
+ /* --------------------入力の処理 -------------------- */
+ /* spanには問題分が入っている為、toransitionでアニメーションを付け*/
+ /* 上記の設定だと300ms(0.3秒)の時間を掛けて文字サイズ・色を変化させます）*/
+ span {
+    transition: all 300ms 0s ease;
+}
+
+
+/*クリックした時、文字色を背景と同じにする。*/
+.add-color {
+    font-size: 0.5em;
+    color: #666;
+}
