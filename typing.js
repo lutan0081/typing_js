@@ -98,6 +98,8 @@ const KeyDown = (e) => {
        //正しい入力の場合スコアを加点する
        score++;
        
+       sound();
+       
        // 最後まで入力したら新しいテキストを用意する
        if(checkTexts.length == 0) {
            createText();
@@ -112,6 +114,7 @@ const KeyDown = (e) => {
     }else{
        wrap.style.backgroundColor = 'red';
     };
+    
 };
    
 
@@ -182,4 +185,11 @@ const rankCheck = (score)  => {
      // 生成したメッセージと一緒に文字列を返す
      return `${score}文字打てました！\n${rankText}\n【OK】リトライ／【キャンセル】終了`;
 };
+
+
+//音楽再生
+const sound = () => {
+    var music = new Audio('sound/keydown.mp3');
+    music.play();
+}
 
