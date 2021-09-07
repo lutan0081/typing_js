@@ -5,147 +5,219 @@ const start = document.getElementById('start');
 
 //テキストの配列作成
 const textLists = [
-        'Hello World','This is my App','How are you?',
-        'Today is sunny','I love JavaScript!','Good morning',
-        'I am Japanese','Let it be','Samurai',
-        'Typing Game','Information Technology',
-        'I want to be a programmer','What day is today?',
-        'I want to build a web app','Nice to meet you',
-        'Chrome Firefox Edge Safari','machine learning',
-        'Brendan Eich','John Resig','React Vue Angular',
-        'Netscape Communications','undefined null NaN',
-        'Thank you very much','Google Apple Facebook Amazon',
-        'ECMAScript','console.log','for while if switch',
-        'var let const','Windows Mac Linux iOS Android',
-        'programming'
-    ];
+        
+    //[0]漢字[1]ローマ字
+    ['長谷亘','hasewataru'],
+    ['ルタン','lutan'],
+    ['隣の客はよく柿食う客だ','tonarinokyakuhayokukakikuukyaku'],
+    ['馬鹿につける薬はない','bakanitukerukusurihanai'],
+    ['ブタに真珠','butanisinju'],
+    ['日頃の恨みを晴らす','higoronouramiwoharasu'],
+    ['インスタグラムで成金の奴','insutaguramudenarikinnoyatu'],
+    ['アイコスレギュラー','aikosuregyura-'],
+    ['六代目大関屋','rokudaimeozekiya'],
+    ['コロナウィルス','koronaulirusu']
+    
+];
+
+
+
+//要素取得
+const startBtn = document.getElementById('btn-social-long-button');
+   
+    
+//スタートボタンの処理
+startBtn.addEventListener('click', () => {
+    
+    //秒数カウントの処理
+    timer();
+    
+});
 
     
-//新しい配列を作成
+//ローマ字を格納する定数
 let checkTexts = [];
 
 
-//問題テキスト表示
+//日本語を格納する定数
+let checkTextsJapanese = [];
+
+
+//テキスト表示
 const createText = () => {
     
-    //p要素取得
-    const p = document.getElementById('text');
+    //日本語要素取得
+    const txtJapanese = document.getElementById('text_japanese');
+    
+    //ローマ字要素取得
+    const txtRoma = document.getElementById('text_roma');
     
     // 配列のインデックス数からランダムな数値を生成する
     const rnd = Math.floor(Math.random() * textLists.length);
     
-        //初期化
-    p.textContent = '';
+    //初期化
+    txtJapanese.textContent = '';
+    
+    txtRoma.textContent = '';
     
     
-    //map()新しい配列を生成し、checkTextsに値を入れる
-    checkTexts = textLists[rnd].split('').map(value =>{
+    //日本語
+    checkTextsJapanese = textLists[rnd][0].split('').map(value =>{
         
-        // span要素を生成あ
+        //ローマ字の設定
+        //span要素を新しく生成
         const span = document.createElement('span')
         
-        // span要素(html)に配列の1文字ずつを当てはめる
+        //span要素(html)に配列の1文字ずつを当てはめる
         span.textContent = value;
         
-        //一度要素に入れてから値を入れない場合エラーになる
-        //pの要素に入れる(1文字ずつ)
-        p.appendChild(span);
+        //上部でtxtRomaの値取得後、再度値を入れる
+        txtJapanese.appendChild(span);
         
         //returnでcheckTextsに入れる
         return span;
     });
     
-    // const rnd = Math.floor(Math.random() * textLists.length);
+    //ローマ字
+    //map()新しい配列を生成し、checkTextsに値を入れる
+    checkTexts = textLists[rnd][1].split('').map(value =>{
+        
+        
+        //ローマ字の設定
+        //span要素を新しく生成
+        const span = document.createElement('span')
+        
+        //span要素(html)に配列の1文字ずつを当てはめる
+        span.textContent = value;
+        
+        //上部でtxtRomaの値取得後、再度値を入れる
+        txtRoma.appendChild(span);
+        
+        //returnでcheckTextsに入れる
+        return span;
+    });
     
-    // p.textContent = textLists[0];
-}; 
-
-
-//スタートボタンの処理
-start.addEventListener('click', () => {
-    start.style.display = 'none';
     
-    
-    //秒数カウントの処理
-    timer();
-    
-    //テキスト作成の関数
-    createText();
-    
-     // キーボードのイベント処理
+    // キーボードのイベント処理
     document.addEventListener('keydown', KeyDown);
-  
-}); 
+    
+}; 
 
 
 //スコアの初期値
 let score = 0;
 
+
 //キーイベント＆入力判定
 const KeyDown = (e) => {
     
-    wrap.style.backgroundColor = '#666';
     
     //同じキーを押した場合の処理
     if(e.key === checkTexts[0].textContent){
-       
-       //add-colorクラスを付与する
-       checkTexts[0].className = 'add-color';
-       
-       //checkTextsの文字を消す
-       checkTexts.shift();
-       
-       //正しい入力の場合スコアを加点する
-       score++;
-       
-       sound();
-       
-       // 最後まで入力したら新しいテキストを用意する
-       if(checkTexts.length == 0) {
-           createText();
-       }
-
-
-    //Shiftキーを押した時は色が変わらない   
-    }else if(e.key === 'Shift'){
-       wrap.style.backgroundColor = '#666';
-    
-    //shitfキー以外の場合色を変える
-    }else{
-       wrap.style.backgroundColor = 'red';
-    };
-    
+      
+        console.log('キーが入力されました')
+        
+        //add-colorクラスを付与する
+        checkTexts[0].className = 'add-color';
+           
+        //checkTextsの文字を消す
+        checkTexts.shift();
+        
+        
+        keySound();
+        
+        
+        //正しい入力の場合スコアを加点する
+        score++;
+           
+           
+        // 最後まで入力したら新しいテキストを用意する
+        if(checkTexts.length == 0) {
+            createText();
+        }
+        
+        
+        //Shiftキーを押した時は色が変わらない   
+        }else if(e.key === 'Shift'){
+            wrap.style.backgroundColor = '#666';
+        
+        
+        //shitfキー以外の場合色を変える
+        }else{
+            wrap.style.backgroundColor = 'red';
+        };
 };
    
 
 //タイマー処理
 const timer = () =>{
     
-    //初期値
-    let time = 60;
+    //秒数の要素設定
+    const gameCount = document.getElementById("count");
     
-    //タイマーの要素を取得
-    const count = document.getElementById('count');
     
-
-    //元々の型 setInterval(() => {},100)
-    //id = time
-    const id = setInterval(() => {
+    //カウントダウンの設定
+    let countDoowTime = 5;
+    
+    
+    //指定した秒数分、カウントを遅延させる
+    window.setTimeout(startSound, 950);
+    
+    
+    //スタートの秒数カウント
+    const startCount = setInterval(() => {
         
-        //clearInterval動作時、idを引数にし、0で停止
-        if(time <= 0) {
-            gameOver(id);
+        //秒数を減らす
+        count.textContent = countDoowTime--;
+        
+        //カウントダウンタイマーが0になった時
+        if(countDoowTime <= -1){
+            
+            //カウントを止める
+            clearInterval(startCount);
+            
+            //ゲームカウントの再設定
+            setGameCount(gameCount);
+            
+            //テキスト作成の関数
+            createText();
         }
-        //1ずつ増やす場合は→time++
-        //タイマーの表示を1ずつ減らしていく
-        count.textContent = time--;
         
-        //カウントが始まると同時にスタートボタンを消す
-        start.style.display = 'none';
-        
-    },1000)
+    },1000);
     
 };
+
+
+//ゲームカウント設定(引数カウントダウンの要素)
+const setGameCount = (gameCount) =>{
+    
+    //ゲームのプレイ時間
+    let time = 60;
+    
+    count.textContent = time;
+    
+    
+    const id = setInterval(() => {
+    
+        //clearInterval動作時、idを引数にし、0で停止
+        if(time <= 0) {
+            
+            //ゲームオーバーの設定
+            gameOver(id);
+            
+        }
+        
+        //1ずつ増やす場合は→time++
+        //タイマーの表示を1ずつ減らしていく
+        gameCount.textContent = time--;
+    
+        //カウントが始まると同時にスタートボタンを消す
+        startBtn.style.display = 'none';
+    
+    },1000)
+    
+    
+}
 
 
 //ゲーム終了処理
@@ -181,15 +253,21 @@ const rankCheck = (score)  => {
          rankText = `あなたのランクはSです。\nおめでとうございます！`;    
      }
      
-     
      // 生成したメッセージと一緒に文字列を返す
      return `${score}文字打てました！\n${rankText}\n【OK】リトライ／【キャンセル】終了`;
 };
 
 
-//音楽再生
-const sound = () => {
-    var music = new Audio('sound/keydown.mp3');
+//クリック時効果音
+const keySound = () => {
+    var music = new Audio('sounds/key_sound');
+    //music.loop = true;
     music.play();
 }
 
+
+//スタート時のカウントダウン音
+const startSound = () => {
+    var music = new Audio('sounds/count_down');
+    music.play();
+}
