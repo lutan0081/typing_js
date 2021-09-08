@@ -20,7 +20,7 @@ body {
 #wrap {
  
    padding: 20px 10px;
-   background-color: #666;
+   background-color: #1da1f3;
    font-weight: bold;
    color: #fff;
 }
@@ -34,10 +34,10 @@ body {
 #text_japanese {
    /*margin-top: 20px;*/
    /*padding: 20px 10px;*/
-   font-size: 50px;
-   background-color: blue;
+   font-size: 40px;
+   background-color: #1da1f3;
    font-weight: bold;
-   color: red;
+   color: #fff;
 }
  
  
@@ -45,13 +45,13 @@ body {
    /*margin-top: 20px;*/
    /*padding: 20px 10px;*/
    font-size: 30px;
-   background-color: red;
+   background-color: #1da1f3;
    font-weight: bold;
-   color: blue;
+   color: #fff;
 }
 
 
-/* --------------------入力の処理 -------------------- */
+/* --------------------STARTボタンの処理 -------------------- */
 #btn-social-long-button {
   color: #FFF;/*文字・アイコン色*/
   border-radius: 7px;/*角丸に*/
@@ -82,9 +82,6 @@ body {
   transform: rotateX(360deg);
 }
 
-
-
-    
     
  
  /* --------------------入力の処理 -------------------- */

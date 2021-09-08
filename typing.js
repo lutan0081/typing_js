@@ -7,7 +7,7 @@ const start = document.getElementById('start');
 const textLists = [
         
     //[0]漢字[1]ローマ字
-    ['長谷亘','hasewataru'],
+    ['人間の平等','ningennobyoudou'],
     ['ルタン','lutan'],
     ['隣の客はよく柿食う客だ','tonarinokyakuhayokukakikuukyaku'],
     ['馬鹿につける薬はない','bakanitukerukusurihanai'],
@@ -16,10 +16,20 @@ const textLists = [
     ['インスタグラムで成金の奴','insutaguramudenarikinnoyatu'],
     ['アイコスレギュラー','aikosuregyura-'],
     ['六代目大関屋','rokudaimeozekiya'],
-    ['コロナウィルス','koronaulirusu']
-    
+    ['コロナウィルス','koronaulirusu'],
+    ['都道府県','todouhuken'],
+    ['クラシック音楽','kurasikkuonngaku'],
+    ['布団が恋しい季節','hutongakoisiikisetu'],
+    ['傘でゴルフの練習','kasedegorufunorennsyu'],
+    ['ご検討をお祈りします','gokentouwooinorisimasu'],
+    ['英会話レッスン','eikaiwaressunn'],
+    ['なんでやねん','nandeyanenn'],
+    ['仕事をする意味が分からない','sigotowosuruimigawakaranai'],
+    ['伊藤博文は初代内閣総理大臣','itouhirohumihasyodainaikakusouridaijin'],
+    ['高額な商品','kougakunasyouhin'],
+    ['適正な価格の取引','tekiseinakakakunotorihiki'],
+    ['おにぎりはやっぱりツナマヨ','onigirihayapparitunamayo']
 ];
-
 
 
 //要素取得
@@ -29,9 +39,11 @@ const startBtn = document.getElementById('btn-social-long-button');
 //スタートボタンの処理
 startBtn.addEventListener('click', () => {
     
+    //カウントが始まると同時にスタートボタンを消す
+    startBtn.style.display = 'none';
+    
     //秒数カウントの処理
     timer();
-    
 });
 
     
@@ -45,6 +57,7 @@ let checkTextsJapanese = [];
 
 //テキスト表示
 const createText = () => {
+    
     
     //日本語要素取得
     const txtJapanese = document.getElementById('text_japanese');
@@ -61,10 +74,9 @@ const createText = () => {
     txtRoma.textContent = '';
     
     
-    //日本語
+    //日本語のテキスト
     checkTextsJapanese = textLists[rnd][0].split('').map(value =>{
         
-        //ローマ字の設定
         //span要素を新しく生成
         const span = document.createElement('span')
         
@@ -78,7 +90,8 @@ const createText = () => {
         return span;
     });
     
-    //ローマ字
+    
+    //ローマ字のテキスト
     //map()新しい配列を生成し、checkTextsに値を入れる
     checkTexts = textLists[rnd][1].split('').map(value =>{
         
@@ -98,7 +111,7 @@ const createText = () => {
     });
     
     
-    // キーボードのイベント処理
+    // キーボードのイベントを発生（KeyDownを作動)
     document.addEventListener('keydown', KeyDown);
     
 }; 
@@ -120,10 +133,12 @@ const KeyDown = (e) => {
         //add-colorクラスを付与する
         checkTexts[0].className = 'add-color';
            
+           
         //checkTextsの文字を消す
         checkTexts.shift();
         
         
+        //入力時の効果音
         keySound();
         
         
@@ -182,7 +197,6 @@ const timer = () =>{
             //テキスト作成の関数
             createText();
         }
-        
     },1000);
     
 };
@@ -194,6 +208,7 @@ const setGameCount = (gameCount) =>{
     //ゲームのプレイ時間
     let time = 60;
     
+    //制限時間の表示
     count.textContent = time;
     
     
@@ -211,8 +226,6 @@ const setGameCount = (gameCount) =>{
         //タイマーの表示を1ずつ減らしていく
         gameCount.textContent = time--;
     
-        //カウントが始まると同時にスタートボタンを消す
-        startBtn.style.display = 'none';
     
     },1000)
     
@@ -258,7 +271,7 @@ const rankCheck = (score)  => {
 };
 
 
-//クリック時効果音
+//タイピング時効果音
 const keySound = () => {
     var music = new Audio('sounds/key_sound');
     //music.loop = true;
